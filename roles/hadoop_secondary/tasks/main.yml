@@ -5,7 +5,7 @@
 - name: Install the namenode and jobtracker packages
   apt: name=${item} state=installed
   with_items: 
-   - hadoop-0.20-mapreduce-jobtrackerha
+   - hadoop-0.20-jobtrackerha
    - hadoop-0.20-namenode
    - hadoop-hdfs-zkfc
    - hadoop-0.20-mapreduce-zkfc
@@ -59,6 +59,6 @@
   with_items: groups.hadoop_masters
 
 - name: start hadoop Jobtracker services
-  service: name=hadoop-0.20-mapreduce-jobtrackerha state=started
+  service: name=hadoop-0.20-jobtrackerha state=started
   delegate_to: '{{ item }}'
   with_items: groups.hadoop_masters

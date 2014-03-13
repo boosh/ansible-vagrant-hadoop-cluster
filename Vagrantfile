@@ -12,17 +12,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "hadoop_master" do |hadoop_master|
     hadoop_master.vm.network "private_network", ip: "192.168.50.4"
-    hadoop_master.vm.hostname = "master.internal"
+    hadoop_master.vm.hostname = "hadoopmaster"
   end
 
   config.vm.define "hadoop_slave1" do |hadoop_slave1|
     hadoop_slave1.vm.network "private_network", ip: "192.168.50.5"
-    hadoop_slave1.vm.hostname = "slave1.internal"
+    hadoop_slave1.vm.hostname = "hadoopslave1"
   end
 
   config.vm.define "hadoop_slave2" do |hadoop_slave2|
     hadoop_slave2.vm.network "private_network", ip: "192.168.50.6"
-    hadoop_slave2.vm.hostname = "slave2.internal"
+    hadoop_slave2.vm.hostname = "hadoopslave2"
 
     hadoop_slave2.vm.provision :ansible do |ansible|
       ansible.inventory_path = "hosts.yml"

@@ -1,7 +1,7 @@
 ---
 # The playbook for common tasks
 - name: Add dependencies
-  apt: pkg={{item}} state=present
+  apt: pkg={{item}} state=present update_cache=yes
   with_items:
   - vim
   - python-pycurl

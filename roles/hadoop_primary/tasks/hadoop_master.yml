@@ -9,6 +9,13 @@
    - hadoop-zookeeper
    - hadoop-zookeeper-server
 
+- name: Set JAVA_HOME in hadoop service
+  lineinfile:
+    regexp="# export JAVA_HOME=/usr/lib/j2sdk1.6-sun"
+    line="export JAVA_HOME=/usr/lib/jvm/java-7-oracle/jre"
+    dest=/etc/hadoop/conf/hadoop-env.sh
+    state=present
+
 - name: Copy the hadoop configuration files
   template: src=roles/common/templates/hadoop_ha_conf/{{ item }}.j2 dest=/etc/hadoop/conf/{{ item }}
   with_items: 
