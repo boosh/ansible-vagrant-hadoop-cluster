@@ -24,6 +24,13 @@
    - ssl-server.xml.example
   notify: restart hadoopha master services
 
+- name: Set JAVA_HOME in hadoop service
+  lineinfile:
+    regexp="# export JAVA_HOME=/usr/lib/j2sdk1.6-sun"
+    line="export JAVA_HOME=/usr/lib/jvm/java-7-oracle/jre"
+    dest=/etc/hadoop/conf/hadoop-env.sh
+    state=present
+
 - name: Create the data directory for the namenode metadata
   file: path={{ item }} owner=hdfs group=hdfs state=directory
   with_items: hadoop.dfs_namenode_name_dir
