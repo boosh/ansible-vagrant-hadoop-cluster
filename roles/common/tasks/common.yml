@@ -1,0 +1,23 @@
+---
+# The playbook for common tasks
+- name: Add dependencies
+  apt: pkg={{item}} state=present
+  with_items:
+  - vim
+  - python-pycurl
+
+- name: Add the Cloudera Repository
+  apt_repository: repo="deb http://archive.cloudera.com/debian maverick-cdh3 contrib" state=present
+
+- name: Add the Cloudera src Repository
+  apt_repository: repo="deb-src http://archive.cloudera.com/debian maverick-cdh3 contrib" state=present
+
+- name: Add the Cloudera APT repository key
+  apt_key: data="{{ lookup('file', 'cloudera-repo.key') }}" state=present
+
+- name: Create the hosts file for all machines
+  template: src=etc/hosts.j2 dest=/etc/hosts
+
+- name: Create the iptables file for all machines
+  template: src=iptables.j2 dest=/etc/network/iptables.rules
+  notify: restart iptables

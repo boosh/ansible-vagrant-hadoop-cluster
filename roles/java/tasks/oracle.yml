@@ -1,0 +1,15 @@
+---
+- include: webupd8.yml
+
+- name: Automatically select the Oracle License
+  tags: java
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+
+- name: Install Oracle Java
+  tags: java
+  apt: pkg={{ item }} update-cache=yes state=latest
+  when: item|search("^oracle")
+  with_items: java_versions
+
+- name: Set JAVA_HOME
+  lineinfile: line=JAVA_HOME=/usr/lib/jvm/java-7-oracle/jre dest=/etc/environment state=present
