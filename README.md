@@ -1,8 +1,9 @@
 # Deploying Hadoop Clusters using Ansible & Vagrant
 
 This project uses vagrant and ansible to launch hadoop on Ubuntu, either as
-a single node (with or without HDFS) or as a cluster. To use, install vagrant &
-ansible, then just run `vagrant up`.
+a single node (with or without HDFS) or as a cluster. Avro is also installed.
+
+To use, install vagrant & ansible, then just run `vagrant up`.
 
 By default a single node will be built with HDFS. To disable HDFS, set
 `install_hdfs` to False in the file `group_vars/all`.

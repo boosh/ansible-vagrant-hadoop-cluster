@@ -8,6 +8,12 @@
   apt: name=hadoop-0.20-datanode state=installed
   when: install_hdfs
 
+- name: Copy avro jars
+  copy: src={{item}} dest=/usr/lib/hadoop-0.20/ owner=root group=root
+  with_items:
+  - avro-1.7.6.jar
+  - avro-mapred-1.7.6-hadoop1.jar
+
 - name: Copy the hadoop configuration files
   template: src=roles/common/templates/hadoop_ha_conf/{{item}}.j2 dest=/etc/hadoop/conf/{{item}}
   with_items: 
