@@ -8,7 +8,9 @@
 
 iface: eth1
 
-ha_enabled: False 
+ha_enabled: False
+
+build_cluster: False
 
 hadoop:
     

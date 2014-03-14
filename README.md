@@ -3,7 +3,11 @@
 This project uses vagrant and ansible to launch a hadoop cluster running on
 Ubuntu guests. To use, install vagrant & ansible, then just run `vagrant up`.
 
-  * NameNode web interface: http://192.168.50.4:50070/
+By default a single node will be built. To build a cluster, edit the
+group_vars/all file and set `build_cluster` to True, then rename
+`Vagrantfile.cluster` to `Vagrantfile` before running `vagrant up`.
+
+  * NameNode web interface: http://192.168.50.4:50070/ (cluster mode only)
   * JobTracker web interface: http://192.168.50.4:50030/
 
 **Note**: Hadoop will use a lot of disk space for the slaves.

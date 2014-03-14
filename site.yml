@@ -26,4 +26,7 @@
   roles:
   - { role: hadoop_slaves }
 
-
+- hosts: hadoop_single_node
+  roles:
+  - hadoop_primary
+  - hadoop_slaves

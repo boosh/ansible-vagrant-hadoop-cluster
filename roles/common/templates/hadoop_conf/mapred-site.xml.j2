@@ -1,8 +1,12 @@
 <configuration>
-  
+
   <property>
     <name>mapred.job.tracker</name>
+    {% if 'hadoop_masters' in group_names %}
     <value>{{ hostvars[groups['hadoop_masters'][0]]['ansible_hostname'] }}:{{ hadoop['mapred_job_tracker_port'] }}</value>
+    {% elif not build_cluster %}
+    <value>{{ hostvars[groups['hadoop_single_node'][0]]['ansible_hostname'] }}:{{ hadoop['mapred_job_tracker_port'] }}</value>
+    {% endif %}
   </property>
 
   <property>
