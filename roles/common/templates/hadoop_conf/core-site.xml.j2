@@ -18,10 +18,14 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
-  {% if 'hadoop_masters' in group_names %}
+  {% if install_hdfs %}
   <property>
       <name>fs.default.name</name>
+      {% if 'hadoop_masters' in group_names %}
       <value>hdfs://{{ hostvars[groups['hadoop_masters'][0]]['ansible_hostname'] + ':' ~ hadoop['fs_default_FS_port'] }}/</value>
+      {% else %}
+      <value>hdfs://{{ hostvars[groups['hadoop_single_node'][0]]['ansible_hostname'] + ':' ~ hadoop['fs_default_FS_port'] }}/</value>
+      {% endif %}
   </property>
   {% endif %}
 </configuration>

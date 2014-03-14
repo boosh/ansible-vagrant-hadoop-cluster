@@ -9,8 +9,9 @@
 iface: eth1
 
 ha_enabled: False
-
-build_cluster: False
+build_cluster: False      # set to True to build a cluster
+install_hdfs: True        # set to false to disable HDFS (only makes sense if
+                          # no cluster is built)
 
 hadoop:
     
@@ -25,7 +26,7 @@ hadoop:
     dfs_namenode_name_dir: 
        - /namedir1/
        - /namedir2/
-    dfs_replication: 3
+    dfs_replication: 1              # set to 3 if building a cluster
     dfs_namenode_handler_count: 50
     dfs_blocksize: 67108864
     dfs_datanode_data_dir:

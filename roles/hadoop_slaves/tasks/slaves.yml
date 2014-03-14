@@ -6,7 +6,7 @@
 
 - name: Install the datanode packages
   apt: name=hadoop-0.20-datanode state=installed
-  when: build_cluster
+  when: install_hdfs
 
 - name: Copy the hadoop configuration files
   template: src=roles/common/templates/hadoop_ha_conf/{{item}}.j2 dest=/etc/hadoop/conf/{{item}}
@@ -48,7 +48,7 @@
 - name: Create the data directory for the slave nodes to store the data
   file: path={{ item }} owner=hdfs group=hdfs state=directory
   with_items: hadoop.dfs_datanode_data_dir
-  when: build_cluster
+  when: install_hdfs
 
 - name: Create the data directory for the slave nodes for mapreduce
   file: path={{ item }} owner=mapred group=mapred state=directory
@@ -59,4 +59,4 @@
 
 - name: start hadoop datanode services
   service: name=hadoop-0.20-datanode state=started
-  when: build_cluster
+  when: install_hdfs

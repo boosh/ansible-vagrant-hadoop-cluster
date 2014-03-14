@@ -1,17 +1,20 @@
 # Deploying Hadoop Clusters using Ansible & Vagrant
 
 This project uses vagrant and ansible to launch hadoop on Ubuntu, either as
-a single node (without HDFS) or as a cluster. To use, install vagrant &
+a single node (with or without HDFS) or as a cluster. To use, install vagrant &
 ansible, then just run `vagrant up`.
 
-By default a single node will be built. To build a cluster, set
-`build_cluster` to True in the file `group_vars/all` and rename
-`Vagrantfile.cluster` to `Vagrantfile` before running `vagrant up`.
+By default a single node will be built with HDFS. To disable HDFS, set
+`install_hdfs` to False in the file `group_vars/all`.
+
+To build a cluster, set `build_cluster` to `True` in `group_vars/all`, and
+also change the the variable `dfs_replication` to '3' in the same file. Then
+rename `Vagrantfile.cluster` to `Vagrantfile` and run `vagrant up`.
 
 Once built, the web UIs are available at:
 
   * JobTracker web interface: http://192.168.50.4:50030/
-  * NameNode web interface: http://192.168.50.4:50070/ (cluster mode only)
+  * NameNode web interface: http://192.168.50.4:50070/ (only when HDFS is enabled)
 
 **Note**: Hadoop will use a lot of disk space for the slaves when building a
 cluster.

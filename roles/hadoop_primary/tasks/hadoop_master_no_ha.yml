@@ -6,7 +6,7 @@
 
 - name: Install namenode
   apt: name=hadoop-0.20-namenode state=installed
-  when: build_cluster
+  when: install_hdfs
 
 - name: Set JAVA_HOME in hadoop service
   lineinfile:
@@ -31,19 +31,19 @@
 
 - name: Create the data directory for the namenode metadata
   file: path=hadoop.dfs_namenode_name_dir owner=hdfs group=hdfs state=directory
-  when: build_cluster
+  when: install_hdfs
 
 - name: Format the namenode
   shell: creates=/usr/lib/hadoop/namenode.formatted su - hdfs -c "hadoop namenode -format" && touch /usr/lib/hadoop/namenode.formatted
-  when: build_cluster
+  when: install_hdfs
 
 - name: start hadoop namenode services
   service: name=hadoop-0.20-namenode state=started
-  when: build_cluster
+  when: install_hdfs
 
 - name: Give permissions for mapred users
   shell: creates=/usr/lib/hadoop/namenode.initialized su - hdfs -c "hadoop fs -chown hdfs:hadoop /"; su - hdfs -c "hadoop fs -chmod 0775 /" && touch /usr/lib/hadoop/namenode.initialized
-  when: build_cluster
+  when: install_hdfs
 
 - name: start hadoop jobtracker services
   service: name=hadoop-0.20-jobtracker state=started
