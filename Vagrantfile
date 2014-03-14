@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "512"]
+    v.customize ["modifyvm", :id, "--cpus", "1", "--memory", "1024"]
   end
 
   config.vm.define "hadoop_single_node" do |hadoop_single_node|
@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     hadoop_single_node.vm.provision :ansible do |ansible|
       ansible.inventory_path = "hosts-singlenode.yml"
-      ansible.verbose = "vv"
+      ansible.verbose = "v"
       ansible.sudo = true
       ansible.playbook = "site.yml"
       ansible.limit = 'hadoop_all'

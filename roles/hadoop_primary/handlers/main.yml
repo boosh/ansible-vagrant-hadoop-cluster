@@ -2,13 +2,20 @@
 # Handlers for the hadoop master services
 
 - name: restart hadoop master services
-  service: name=${item} state=restarted
+  service: name={{item}} state=restarted
+  with_items:
+    - hadoop-0.20-jobtracker
+  when: not build_cluster
+
+- name: restart hadoop master services
+  service: name={{item}} state=restarted
   with_items: 
     - hadoop-0.20-jobtracker
     - hadoop-0.20-namenode
+  when: build_cluster
 
 - name: restart hadoopha master services
-  service: name=${item} state=restarted
+  service: name={{item}} state=restarted
   with_items: 
     - hadoop-0.20-jobtracker
     - hadoop-0.20-namenode

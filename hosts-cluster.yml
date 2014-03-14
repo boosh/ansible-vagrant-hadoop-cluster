@@ -1,0 +1,17 @@
+# Definition of hosts in a hadoop cluster
+[hadoop_all:children]
+hadoop_masters
+hadoop_slaves
+
+[hadoop_master_primary]
+hadoopmaster ansible_ssh_host=192.168.50.4
+
+[hadoop_master_secondary]
+
+[hadoop_masters:children]
+hadoop_master_primary
+hadoop_master_secondary
+
+[hadoop_slaves]
+hadoopslave1 ansible_ssh_host=192.168.50.5
+hadoopslave2 ansible_ssh_host=192.168.50.6
