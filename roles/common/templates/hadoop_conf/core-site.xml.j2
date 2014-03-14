@@ -18,7 +18,7 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
-<property>
+  <property>
       <name>fs.default.name</name>
       <value>hdfs://{{ hostvars[groups['hadoop_masters'][0]]['ansible_hostname'] + ':' ~ hadoop['fs_default_FS_port'] }}/</value>
   </property>
