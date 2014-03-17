@@ -2,4 +2,4 @@
 hadoop_single_node
 
 [hadoop_single_node]
-hadoopsinglenode ansible_ssh_host=192.168.50.8
+hadoopsinglenode ansible_ssh_host=192.168.50.4
